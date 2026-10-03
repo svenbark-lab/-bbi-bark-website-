@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://glittery-yeot-7cd024.netlify.app/sitemap.xml
+Sitemap: https://bbi-bark.de/sitemap.xml
