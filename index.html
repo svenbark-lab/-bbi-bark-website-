@@ -242,6 +242,31 @@
   .project-card h3{font-size:1.08em; margin-bottom:.2em;}
   .project-loc{color:var(--gold); font-size:.88em; font-weight:600; margin-bottom:.6em;}
   .project-card p{color:var(--ink-soft); font-size:.95em;}
+  .project-card-gallery{cursor:pointer; border-radius:var(--radius); transition:box-shadow .15s ease;}
+  .project-card-gallery:hover, .project-card-gallery:focus-visible{box-shadow:0 8px 20px rgba(58,46,39,.1);}
+  .gallery-hint{display:flex; align-items:center; gap:6px; color:var(--brick); font-size:.85em; font-weight:600; margin:10px 0 0;}
+  .gallery-hint svg{flex-shrink:0; fill:none; stroke:currentColor; stroke-width:2;}
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    display:none; position:fixed; inset:0; background:rgba(44,58,47,.94); z-index:1000;
+    align-items:center; justify-content:center; padding:24px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-inner{max-width:900px; width:100%; text-align:center;}
+  .lightbox-inner img{width:100%; height:auto; border-radius:4px; display:block; margin:0 auto; max-height:72vh; object-fit:contain; background:var(--moor-dark);}
+  .lightbox-caption{color:var(--sand); font-size:.92em; margin:16px 0 0;}
+  .lightbox-controls{display:flex; align-items:center; justify-content:space-between; margin-top:16px; gap:12px;}
+  .lightbox-controls button{
+    background:none; border:1px solid rgba(242,233,216,.4); color:var(--sand); border-radius:var(--radius);
+    padding:8px 18px; cursor:pointer; font-size:.95em; font-family:inherit;
+  }
+  .lightbox-controls button:hover{border-color:var(--sand);}
+  .lightbox-count{color:rgba(242,233,216,.7); font-size:.85em;}
+  .lightbox-close{
+    position:absolute; top:22px; right:26px; background:none; border:none;
+    color:var(--sand); font-size:2em; line-height:1; cursor:pointer;
+  }
 
   .carousel-arrow{
     position:absolute; top:38%; transform:translateY(-50%);
@@ -505,7 +530,7 @@
               </article>
             </li>
             <li class="carousel-slide">
-              <article class="project-card">
+              <article class="project-card project-card-gallery" tabindex="0" role="button" aria-haspopup="dialog" data-gallery="goeldner">
                 <svg class="project-sketch" viewBox="0 0 300 180" role="img" aria-label="Einfamilienhaus mit Friesengiebel">
                   <line x1="30" y1="150" x2="270" y2="150" stroke="var(--ink-soft)" stroke-width="1" opacity=".5"/>
                   <rect x="70" y="90" width="160" height="60" fill="none" stroke="var(--ink)" stroke-width="2"/>
@@ -520,8 +545,12 @@
                   <rect x="139" y="116" width="22" height="34" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
                 </svg>
                 <h3>Einfamilienhaus mit Friesengiebel</h3>
-                <p class="project-loc">Weser-Elbe-Dreieck</p>
+                <p class="project-loc">Delmenhorst</p>
                 <p>Individuell geplant im norddeutschen Stil, mit klassischem Zierziebel und Fachwerkdetails.</p>
+                <p class="gallery-hint">
+                  <svg class="icon" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  Bilder aus der Bauphase ansehen
+                </p>
               </article>
             </li>
             <li class="carousel-slide">
@@ -670,6 +699,19 @@
 
 </main>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildergalerie Bauphase">
+  <button type="button" class="lightbox-close" id="lbClose" aria-label="Galerie schließen">&times;</button>
+  <div class="lightbox-inner">
+    <img id="lbImg" src="" alt="">
+    <p class="lightbox-caption" id="lbCaption"></p>
+    <div class="lightbox-controls">
+      <button type="button" id="lbPrev">← Zurück</button>
+      <span class="lightbox-count" id="lbCount"></span>
+      <button type="button" id="lbNext">Weiter →</button>
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
@@ -706,6 +748,55 @@
   document.querySelectorAll('.js-email').forEach(function(el){
     el.textContent = SITE_EMAIL;
     if (el.tagName === 'A') { el.href = 'mailto:' + SITE_EMAIL; }
+  });
+
+  var galleries = {
+    goeldner: [
+      {src:'projekt-goeldner-1.jpg', caption:'Rohbau, Außenanlagen noch im Bau'},
+      {src:'projekt-goeldner-2.jpg', caption:'Carport fertig, Einfahrt noch unbefestigt'},
+      {src:'projekt-goeldner-3.jpg', caption:'Gartenseite, letzte Arbeiten am Grundstück'},
+      {src:'projekt-goeldner-4.jpg', caption:'Fertiges Haus mit angelegtem Garten'}
+    ]
+  };
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCaption = document.getElementById('lbCaption');
+  var lbCount = document.getElementById('lbCount');
+  var currentGallery = [];
+  var currentIndex = 0;
+
+  function showPhoto(i){
+    currentIndex = (i + currentGallery.length) % currentGallery.length;
+    var photo = currentGallery[currentIndex];
+    lbImg.src = photo.src;
+    lbImg.alt = photo.caption;
+    lbCaption.textContent = photo.caption;
+    lbCount.textContent = (currentIndex + 1) + ' / ' + currentGallery.length;
+  }
+  function openGallery(name){
+    if (!galleries[name]) { return; }
+    currentGallery = galleries[name];
+    showPhoto(0);
+    lightbox.classList.add('open');
+  }
+  function closeGallery(){
+    lightbox.classList.remove('open');
+  }
+  document.querySelectorAll('[data-gallery]').forEach(function(card){
+    card.addEventListener('click', function(){ openGallery(card.getAttribute('data-gallery')); });
+    card.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openGallery(card.getAttribute('data-gallery')); }
+    });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeGallery);
+  document.getElementById('lbPrev').addEventListener('click', function(){ showPhoto(currentIndex - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(){ showPhoto(currentIndex + 1); });
+  lightbox.addEventListener('click', function(e){ if (e.target === lightbox) { closeGallery(); } });
+  document.addEventListener('keydown', function(e){
+    if (!lightbox.classList.contains('open')) { return; }
+    if (e.key === 'Escape') { closeGallery(); }
+    if (e.key === 'ArrowLeft') { showPhoto(currentIndex - 1); }
+    if (e.key === 'ArrowRight') { showPhoto(currentIndex + 1); }
   });
 
   var mapConsentBtn = document.getElementById('mapConsentBtn');
