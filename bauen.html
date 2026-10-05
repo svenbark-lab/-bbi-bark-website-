@@ -91,13 +91,18 @@
     .steps{grid-template-columns:1fr;}
     .page-hero h1{font-size:1.9em;}
   }
+  /* Logo im Kopfbereich */
+  .logo{display:inline-flex; align-items:center; gap:14px; font-size:2.7em; line-height:1; white-space:nowrap;}
+  .logo img{height:.95em; width:auto; display:block;}
+  .nav-wrap{padding-top:10px; padding-bottom:10px;}
+  @media (max-width:560px){ .logo{font-size:2.1em; gap:10px;} }
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="nav-wrap">
-    <a href="index.html" class="logo">BBI Bark</a>
+    <a href="index.html" class="logo" aria-label="BBI Bark – zur Startseite"><img src="bbi-symbol.png" alt="" width="240" height="133"><span>BBI Bark</span></a>
     <a href="index.html#kontakt" class="back-link">← Zur Startseite / Kontakt</a>
   </div>
 </header>
