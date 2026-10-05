@@ -1,6 +1,6 @@
 /* Schwebender „Folge uns“-Button mit Social-Media-Links (BBI Bark) */
 (function(){
-  var FB = 'https://www.facebook.com/BbiBark';
+  var FB = 'https://www.facebook.com/share/1FfbuyR3dr/';
   var IG = 'https://www.instagram.com/bbi_bark/';
 
   var css = '' +
