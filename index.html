@@ -247,6 +247,25 @@
   .project-card p{color:var(--ink-soft); font-size:.95em;}
   .project-card-gallery{cursor:pointer; border-radius:var(--radius); transition:box-shadow .15s ease;}
   .project-card-gallery:hover, .project-card-gallery:focus-visible{box-shadow:0 8px 20px rgba(58,46,39,.1);}
+
+  /* Objekt "In Planung" mit Enthüllen-Effekt */
+  .reveal-media{position:relative; overflow:hidden; border-radius:4px; margin-bottom:18px; background:var(--sand); cursor:pointer; aspect-ratio:4/3;}
+  .reveal-media img{width:100%; height:100%; object-fit:cover; display:block; filter:blur(18px) saturate(.9); transform:scale(1.12); transition:filter .5s ease, transform .5s ease;}
+  .reveal-media:hover img, .reveal-media:focus-visible img, .reveal-media.revealed img{filter:none; transform:scale(1);}
+  .reveal-badge{position:absolute; top:12px; left:12px; background:var(--brick); color:#fff; font-size:.78em; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 10px; border-radius:3px;}
+  .reveal-cue{position:absolute; left:0; right:0; bottom:0; padding:28px 14px 12px; text-align:center; color:#fff; font-weight:600; font-size:.92em; background:linear-gradient(to top, rgba(44,58,47,.78), rgba(44,58,47,0)); transition:opacity .3s ease; pointer-events:none;}
+  .reveal-media:hover .reveal-cue, .reveal-media:focus-visible .reveal-cue, .reveal-media.revealed .reveal-cue{opacity:0;}
+  .cue-touch{display:none;}
+  @media (hover:none){ .cue-mouse{display:none;} .cue-touch{display:inline;} }
+  @media (prefers-reduced-motion:reduce){ .reveal-media img{transition:none;} }
+  .interest-toggle{margin-top:14px; cursor:pointer; border:0; font-family:inherit;}
+  .interest-form{display:none; margin-top:14px; padding:16px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);}
+  .interest-form.open{display:block;}
+  .interest-form label{display:block; font-size:.85em; font-weight:600; margin:0 0 4px;}
+  .interest-form input[type=text], .interest-form input[type=email]{width:100%; padding:10px 12px; margin-bottom:10px; border:1px solid var(--line); border-radius:var(--radius); font:inherit; background:#fff; color:var(--ink);}
+  .interest-form .checkbox-line{display:flex; gap:8px; align-items:flex-start; font-weight:400; font-size:.82em; margin:0 0 12px;}
+  .interest-form .checkbox-line input{margin-top:3px;}
+  .interest-form .form-hint{font-size:.8em; margin:8px 0 0; color:var(--ink-soft);}
   .gallery-hint{display:flex; align-items:center; gap:6px; color:var(--brick); font-size:.85em; font-weight:600; margin:10px 0 0;}
   .gallery-hint svg{flex-shrink:0; fill:none; stroke:currentColor; stroke-width:2;}
 
@@ -557,6 +576,31 @@
                 <p>Individuell geplant, ca. 160 m² Wohnfläche.</p>
               </article>
             </li>
+            <!-- OBJEKT-SCHARBEUTZ-START (erst freischalten nach positivem Bescheid zur Bauvoranfrage und Einverständnis Hr. Kutteroff: Kommentar-Markierungen entfernen und Fotos projekt-scharbeutz-1..4.jpg hochladen)
+            <li class="carousel-slide">
+              <article class="project-card" id="objektScharbeutz">
+                <div class="reveal-media" id="revealScharbeutz" tabindex="0" role="button" aria-label="Fotos vom Grundstück in Scharbeutz ansehen">
+                  <img src="projekt-scharbeutz-1.jpg" alt="Wiesengrundstück in Scharbeutz mit Blick auf einen See" loading="lazy" decoding="async">
+                  <span class="reveal-badge">In Planung</span>
+                  <span class="reveal-cue"><span class="cue-mouse">Mit der Maus darüberfahren</span><span class="cue-touch">Tippen zum Enthüllen</span></span>
+                </div>
+                <h3>Hier entstehen 4 Doppelhaushälften</h3>
+                <p class="project-loc">Scharbeutz · Ostsee</p>
+                <p>Ein Grundstück mit Seeblick, vier Doppelhaushälften in Planung. Die Bauvoranfrage ist gestellt. Wer sich jetzt vormerken lässt, erfährt es als Erste oder Erster.</p>
+                <button type="button" class="btn btn-primary interest-toggle" id="interestToggle" aria-expanded="false" aria-controls="interestForm">Interesse anmelden</button>
+                <form class="interest-form" id="interestForm" novalidate>
+                  <label for="if-name">Name *</label>
+                  <input type="text" id="if-name" autocomplete="name" required>
+                  <label for="if-email">E-Mail *</label>
+                  <input type="email" id="if-email" autocomplete="email" required>
+                  <label class="checkbox-line"><input type="checkbox" id="if-consent" required><span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und akzeptiere sie. *</span></label>
+                  <button type="submit" class="btn btn-primary">Vormerken</button>
+                  <p class="form-hint">Öffnet Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht. Unverbindlich.</p>
+                  <p class="form-hint" id="if-error" style="color:var(--brick); display:none;">Bitte Name, E-Mail und Datenschutz-Haken ausfüllen.</p>
+                </form>
+              </article>
+            </li>
+            OBJEKT-SCHARBEUTZ-END -->
             <li class="carousel-slide">
               <article class="project-card">
                 <svg class="project-sketch" viewBox="0 0 300 180" role="img" aria-label="Neues Projekt aktuell in Planung">
@@ -828,6 +872,47 @@
       navToggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+
+  /* Objekt Scharbeutz: Enthüllen, Galerie, Interesse anmelden */
+  galleries.scharbeutz = [
+    {src:'projekt-scharbeutz-1.jpg', caption:'Blick vom Grundstück Richtung See'},
+    {src:'projekt-scharbeutz-2.jpg', caption:'Das Grundstück'},
+    {src:'projekt-scharbeutz-3.jpg', caption:'Grundstück von der Straßenseite'},
+    {src:'projekt-scharbeutz-4.jpg', caption:'Grundstück, Blick über die Wiese'}
+  ];
+  (function(){
+    var media = document.getElementById('revealScharbeutz');
+    if (!media) { return; }
+    var touchOnly = window.matchMedia('(hover: none)').matches;
+    function act(){
+      if (touchOnly && !media.classList.contains('revealed')) { media.classList.add('revealed'); return; }
+      openGallery('scharbeutz');
+    }
+    media.addEventListener('click', act);
+    media.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); }
+    });
+    var toggle = document.getElementById('interestToggle');
+    var form = document.getElementById('interestForm');
+    toggle.addEventListener('click', function(){
+      var open = form.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('if-name').value.trim();
+      var mail = document.getElementById('if-email').value.trim();
+      var ok = document.getElementById('if-consent').checked;
+      var err = document.getElementById('if-error');
+      if (!name || !mail || mail.indexOf('@') < 1 || !ok) { err.style.display = 'block'; return; }
+      err.style.display = 'none';
+      var subject = encodeURIComponent('Interesse: 4 Doppelhaushälften Scharbeutz');
+      var body = encodeURIComponent('Guten Tag,\n\nich interessiere mich für das Projekt in Scharbeutz (4 Doppelhaushälften) und möchte vorgemerkt werden.\n\n—\n' + name + '\n' + mail);
+      window.location.href = 'mailto:' + SITE_EMAIL + '?subject=' + subject + '&body=' + body;
+      form.reset();
+    });
+  })();
 
   document.getElementById('contactForm').addEventListener('submit', function(e){
     e.preventDefault();
