@@ -4,19 +4,19 @@
   var IG = 'https://www.instagram.com/bbi_bark/';
 
   var css = '' +
-  '.sf{position:fixed; right:20px; bottom:20px; z-index:90; display:flex; flex-direction:column; align-items:flex-end; gap:10px; font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;}' +
+  '.sf{position:fixed; left:20px; bottom:20px; z-index:90; display:flex; flex-direction:column; align-items:flex-start; gap:10px; font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;}' +
   '.sf-toggle{display:inline-flex; align-items:center; gap:8px; border:0; cursor:pointer; background:#9C4630; color:#fff; font-family:inherit; font-weight:600; font-size:.95rem; line-height:1; padding:13px 18px; border-radius:999px; box-shadow:0 6px 18px rgba(44,58,47,.28); transition:background .15s ease, transform .15s ease;}' +
   '.sf-toggle:hover{background:#7A3524; transform:translateY(-1px);}' +
   '.sf-toggle:focus-visible,.sf-link:focus-visible{outline:3px solid #B98A3E; outline-offset:2px;}' +
   '.sf-toggle svg{width:18px; height:18px; flex:none; transition:transform .2s ease;}' +
   '.sf.open .sf-toggle svg{transform:rotate(45deg);}' +
-  '.sf-panel{display:none; flex-direction:column; gap:8px; align-items:flex-end;}' +
+  '.sf-panel{display:none; flex-direction:column; gap:8px; align-items:flex-start;}' +
   '.sf.open .sf-panel{display:flex;}' +
   '.sf-link{display:inline-flex; align-items:center; gap:10px; text-decoration:none; background:#FBF7EE; color:#3A2E27; font-weight:600; font-size:.92rem; padding:8px 16px 8px 8px; border-radius:999px; border:1px solid rgba(58,46,39,.18); box-shadow:0 4px 14px rgba(44,58,47,.18); transition:border-color .15s ease, color .15s ease;}' +
   '.sf-link:hover{border-color:#9C4630; color:#9C4630;}' +
   '.sf-ico{width:34px; height:34px; border-radius:50%; background:#3A4B3D; color:#F2E9D8; display:inline-flex; align-items:center; justify-content:center;}' +
   '.sf-ico svg{width:18px; height:18px;}' +
-  '@media (max-width:560px){.sf{right:14px; bottom:14px;} .sf-toggle{padding:12px 15px;}}' +
+  '@media (max-width:560px){.sf{left:14px; bottom:14px;} .sf-toggle{padding:12px 15px;}}' +
   '@media (prefers-reduced-motion:reduce){.sf-toggle,.sf-toggle svg{transition:none;}}';
 
   var style = document.createElement('style');
