@@ -305,11 +305,12 @@
 
   /* ---------- Partnerbetriebe & Lieferanten ---------- */
   .partner{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .partner-grid{
-    margin-top:48px; display:flex; flex-wrap:wrap; justify-content:center; gap:40px 32px;
-  }
+  .partner-carousel{margin-top:48px;}
+  .partner-carousel .carousel-viewport{padding-top:2px;}
+  .partner-carousel .carousel-track{justify-content:safe center;}
+  .partner-carousel .carousel-slide{flex:0 0 calc((100% - 64px) / 3);}
   .partner-card{
-    flex:0 1 300px; border-top:2px solid var(--gold); padding-top:22px; text-align:center;
+    height:100%; border-top:2px solid var(--gold); padding-top:22px; text-align:center;
     display:flex; flex-direction:column; align-items:center;
   }
   .partner-logo-link{display:block; margin-bottom:18px;}
@@ -319,7 +320,6 @@
   .partner-card h3{font-size:1.05em; margin-bottom:.2em;}
   .partner-card p{color:var(--ink-soft); font-size:.92em; margin-bottom:14px;}
   .partner-card .btn-ghost{font-size:.88em; padding:8px 18px;}
-  @media (max-width:640px){ .partner-card{flex-basis:100%;} }
 
   /* ---------- Kontakt ---------- */
   .kontakt{
@@ -382,7 +382,7 @@
     .hero-photo{border-radius:10px;}
     .hero h1{font-size:2.1em; max-width:16ch;}
     .process{grid-template-columns:1fr 1fr; row-gap:20px;}
-    .carousel-slide{flex-basis:calc((100% - 32px) / 2);}
+    .carousel-slide, .partner-carousel .carousel-slide{flex-basis:calc((100% - 32px) / 2);}
     .carousel-arrow{display:none;}
     .kundenmeinungen .testimonial-grid{grid-template-columns:1fr; gap:36px;}
     .kontakt .wrap{grid-template-columns:1fr; gap:36px;}
@@ -399,7 +399,7 @@
   @media (max-width:520px){
     .process{grid-template-columns:1fr;}
     .hero h1{font-size:1.8em;}
-    .carousel-slide{flex-basis:88%;}
+    .carousel-slide, .partner-carousel .carousel-slide{flex-basis:88%;}
   }
 </style>
 </head>
@@ -603,24 +603,33 @@
       <h2>Partnerbetriebe &amp; Lieferanten</h2>
       <p class="section-sub">Verlässliche Handwerksbetriebe und Partner, mit denen wir zusammenarbeiten.</p>
 
-      <div class="partner-grid">
-        <article class="partner-card">
-          <a class="partner-logo-link" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">
-            <img class="partner-logo" src="partner-zimmerei-kern.jpg" alt="Logo Zimmerei Kern" loading="lazy" decoding="async">
-          </a>
-          <h3>Zimmerei Kern</h3>
-          <p>Zimmererhandwerk</p>
-          <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
-        </article>
-
-        <article class="partner-card">
-          <a class="partner-logo-link" href="https://gutachter-kern.de/" target="_blank" rel="noopener">
-            <img class="partner-logo" src="partner-gutachter-kern.png" alt="Logo Andreas Kern, öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk" loading="lazy" decoding="async">
-          </a>
-          <h3>Andreas Kern</h3>
-          <p>Öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk</p>
-          <a class="btn btn-ghost" href="https://gutachter-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
-        </article>
+      <div class="carousel partner-carousel" id="partnerCarousel">
+        <div class="carousel-viewport" id="partnerViewport" tabindex="0" role="region" aria-roledescription="Karussell" aria-label="Partnerbetriebe">
+          <ul class="carousel-track" id="partnerTrack">
+            <li class="carousel-slide">
+          <article class="partner-card">
+            <a class="partner-logo-link" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">
+              <img class="partner-logo" src="partner-zimmerei-kern.jpg" alt="Logo Zimmerei Kern" loading="lazy" decoding="async">
+            </a>
+            <h3>Zimmerei Kern</h3>
+            <p>Zimmererhandwerk</p>
+            <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
+          </article>
+            </li>
+            <li class="carousel-slide">
+          <article class="partner-card">
+            <a class="partner-logo-link" href="https://gutachter-kern.de/" target="_blank" rel="noopener">
+              <img class="partner-logo" src="partner-gutachter-kern.png" alt="Logo Andreas Kern, öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk" loading="lazy" decoding="async">
+            </a>
+            <h3>Andreas Kern</h3>
+            <p>Öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk</p>
+            <a class="btn btn-ghost" href="https://gutachter-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
+          </article>
+            </li>
+          </ul>
+        </div>
+        <button class="carousel-arrow carousel-prev" id="partnerPrev" aria-label="Vorheriger Partner">‹</button>
+        <button class="carousel-arrow carousel-next" id="partnerNext" aria-label="Nächster Partner">›</button>
       </div>
     </div>
   </section>
@@ -967,6 +976,43 @@
     } else {
       startAuto();
     }
+  })();
+
+  (function(){
+    var viewport = document.getElementById('partnerViewport');
+    var track = document.getElementById('partnerTrack');
+    var prevBtn = document.getElementById('partnerPrev');
+    var nextBtn = document.getElementById('partnerNext');
+    if (!viewport || !track) { return; }
+    var slides = Array.prototype.slice.call(track.children);
+    var current = 0, timer = null;
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function overflows(){ return track.scrollWidth > viewport.clientWidth + 4; }
+    function updateUi(){
+      var show = overflows();
+      prevBtn.style.display = nextBtn.style.display = show ? '' : 'none';
+      if (!show) { stop(); } else { start(); }
+    }
+    function goTo(i){
+      if (i < 0) { i = slides.length - 1; }
+      if (i >= slides.length) { i = 0; }
+      current = i;
+      viewport.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
+    }
+    function stop(){ if (timer) { window.clearInterval(timer); timer = null; } }
+    function start(){
+      if (reduced || timer || !overflows()) { return; }
+      timer = window.setInterval(function(){ goTo(current + 1); }, 5000);
+    }
+    prevBtn.addEventListener('click', function(){ stop(); goTo(current - 1); });
+    nextBtn.addEventListener('click', function(){ stop(); goTo(current + 1); });
+    viewport.addEventListener('mouseenter', stop);
+    viewport.addEventListener('mouseleave', start);
+    viewport.addEventListener('focusin', stop);
+    viewport.addEventListener('touchstart', stop, { passive: true });
+    window.addEventListener('resize', updateUi);
+    updateUi();
   })();
 </script>
 
