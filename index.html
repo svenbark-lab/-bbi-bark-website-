@@ -404,6 +404,11 @@
     .hero h1{font-size:1.8em;}
     .carousel-slide, .partner-carousel .carousel-slide{flex-basis:88%;}
   }
+  /* Logo im Kopfbereich */
+  .logo{display:inline-flex; align-items:center; gap:14px; font-size:2.7em; line-height:1; white-space:nowrap;}
+  .logo img{height:.95em; width:auto; display:block;}
+  .nav-wrap{padding-top:10px; padding-bottom:10px;}
+  @media (max-width:560px){ .logo{font-size:2.1em; gap:10px;} }
 </style>
 </head>
 <body>
@@ -412,7 +417,7 @@
 
 <header class="site-header">
   <div class="nav-wrap">
-    <a href="#top" class="logo">BBI Bark</a>
+    <a href="#top" class="logo" aria-label="BBI Bark – zur Startseite"><img src="bbi-symbol.png" alt="" width="240" height="133"><span>BBI Bark</span></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menü</button>
     <nav class="nav-links" id="navLinks">
       <a href="#leistungen">Leistungen</a>
