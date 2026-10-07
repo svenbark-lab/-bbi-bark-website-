@@ -255,6 +255,8 @@
   .reveal-badge{position:absolute; top:12px; left:12px; background:var(--brick); color:#fff; font-size:.78em; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:5px 10px; border-radius:3px;}
   .reveal-cue{position:absolute; left:0; right:0; bottom:0; padding:28px 14px 12px; text-align:center; color:#fff; font-weight:600; font-size:.92em; background:linear-gradient(to top, rgba(44,58,47,.78), rgba(44,58,47,0)); transition:opacity .3s ease; pointer-events:none;}
   .reveal-media:hover .reveal-cue, .reveal-media:focus-visible .reveal-cue, .reveal-media.revealed .reveal-cue{opacity:0;}
+  .reveal-static{cursor:default;}
+  .reveal-static img, .reveal-static:hover img{filter:blur(7px) saturate(.95); transform:scale(1.06);}
   .cue-touch{display:none;}
   @media (hover:none){ .cue-mouse{display:none;} .cue-touch{display:inline;} }
   @media (prefers-reduced-motion:reduce){ .reveal-media img{transition:none;} }
@@ -576,7 +578,18 @@
                 <p>Individuell geplant, ca. 160 m² Wohnfläche.</p>
               </article>
             </li>
-            <!-- OBJEKT-SCHARBEUTZ-START (ERSETZT die folgende Karte "Ein neues Projekt entsteht", diese dann löschen; erst freischalten nach positivem Bescheid zur Bauvoranfrage und Einverständnis Hr. Kutteroff: Kommentar-Markierungen entfernen und Fotos projekt-scharbeutz-1..4.jpg hochladen)
+            <li class="carousel-slide">
+              <article class="project-card" id="objektScharbeutzStatisch">
+                <div class="reveal-media reveal-static">
+                  <img src="projekt-scharbeutz-1.jpg" alt="Baugrundstück in Scharbeutz, Foto absichtlich unscharf" loading="lazy" decoding="async">
+                  <span class="reveal-badge">In Planung</span>
+                </div>
+                <h3>Baugrundstück in Scharbeutz</h3>
+                <p class="project-loc">Referenzobjekt · Scharbeutz, Ostsee</p>
+                <p>Ein Grundstück mit Seeblick, aktuell in Planung. Mehr dazu zeigen wir hier, sobald es soweit ist.</p>
+              </article>
+            </li>
+            <!-- OBJEKT-SCHARBEUTZ-SPAETER-START (Vollversion mit Klick-Galerie und Interessenten-Formular; erst nach positivem Bescheid zur Bauvoranfrage / Kaufabsicht: die aktuelle Karte "objektScharbeutzStatisch" ersetzen, Kommentar-Markierungen entfernen, Fotos 2-4 hochladen)
             <li class="carousel-slide">
               <article class="project-card" id="objektScharbeutz">
                 <div class="reveal-media" id="revealScharbeutz" tabindex="0" role="button" aria-label="Fotos vom Grundstück in Scharbeutz ansehen">
@@ -600,20 +613,7 @@
                 </form>
               </article>
             </li>
-            OBJEKT-SCHARBEUTZ-END -->
-            <li class="carousel-slide">
-              <article class="project-card">
-                <svg class="project-sketch" viewBox="0 0 300 180" role="img" aria-label="Neues Projekt aktuell in Planung">
-                  <rect x="34" y="34" width="232" height="112" fill="none" stroke="#9C4630" stroke-width="2" stroke-dasharray="6,5"/>
-                  <circle cx="86" cy="70" r="3" fill="#9C4630"/><line x1="98" y1="70" x2="214" y2="70" stroke="#9C4630" stroke-width="1.6"/>
-                  <circle cx="86" cy="90" r="3" fill="#9C4630"/><line x1="98" y1="90" x2="214" y2="90" stroke="#9C4630" stroke-width="1.6"/>
-                  <circle cx="86" cy="110" r="3" fill="#9C4630"/><line x1="98" y1="110" x2="180" y2="110" stroke="#9C4630" stroke-width="1.6"/>
-                </svg>
-                <h3>Ein neues Projekt entsteht</h3>
-                <p class="project-loc">Demnächst</p>
-                <p>Aktuell am Reißbrett: ein weiteres individuell geplantes Haus. Sobald die Pläne stehen, zeigen wir hier mehr.</p>
-              </article>
-            </li>
+            OBJEKT-SCHARBEUTZ-SPAETER-END -->
           </ul>
         </div>
         <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Vorheriges Projekt zeigen">‹</button>
@@ -666,16 +666,6 @@
             <h3>Zimmerei Kern</h3>
             <p>Zimmererhandwerk</p>
             <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
-          </article>
-            </li>
-            <li class="carousel-slide">
-          <article class="partner-card">
-            <a class="partner-logo-link" href="https://gutachter-kern.de/" target="_blank" rel="noopener">
-              <img class="partner-logo" src="partner-gutachter-kern.png" alt="Logo Andreas Kern, öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk" loading="lazy" decoding="async">
-            </a>
-            <h3>Andreas Kern</h3>
-            <p>Öffentlich bestellter und vereidigter Sachverständiger für das Zimmererhandwerk</p>
-            <a class="btn btn-ghost" href="https://gutachter-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
           </article>
             </li>
           </ul>
