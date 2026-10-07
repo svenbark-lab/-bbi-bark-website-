@@ -330,6 +330,24 @@
   /* ---------- Partnerbetriebe & Lieferanten ---------- */
   .partner{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .partner-card p.partner-tag{font-size:.74em; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--brick); margin:0 0 6px;}
+  .partner-strip{display:flex; flex-wrap:wrap; justify-content:center; gap:28px 56px; margin-top:40px;}
+  .pl-group{text-align:center;}
+  .pl-label{font-size:.74em; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--brick); margin:0 0 12px;}
+  .pl-row{display:flex; flex-wrap:wrap; justify-content:center; gap:16px;}
+  .pl-logo{display:flex; align-items:center; justify-content:center; width:150px; height:84px; padding:8px 10px; background:#fff; border:1px solid var(--line); border-radius:var(--radius); cursor:pointer; filter:grayscale(1); opacity:.7; transition:filter .25s ease, opacity .25s ease, border-color .25s ease, transform .25s ease;}
+  .pl-logo img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;}
+  .pl-logo:hover, .pl-logo:focus-visible, .pl-logo.active{filter:none; opacity:1; border-color:var(--gold);}
+  .pl-logo:hover{transform:translateY(-2px);}
+  .pl-logo:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .partner-detail{max-width:640px; margin:30px auto 0; text-align:center; border-top:2px solid var(--gold); padding-top:22px; min-height:190px;}
+  .partner-detail[hidden], .pd[hidden]{display:none;}
+  .pd p.pd-tag{font-size:.74em; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--brick); margin:0 0 6px;}
+  .pd h3{font-size:1.15em; margin:0 0 .3em;}
+  .pd p{color:var(--ink-soft); font-size:.95em; margin:0 0 14px;}
+  .pd .pd-sub{margin:0 0 8px;}
+  .pd .btn-ghost{font-size:.88em; padding:8px 18px;}
+  @media (max-width:560px){ .pl-row{gap:10px;} .pl-logo{width:96px; height:66px; padding:6px;} }
+  @media (prefers-reduced-motion:reduce){ .pl-logo{transition:none;} }
   .partner-carousel{margin-top:48px;}
   .partner-carousel .carousel-viewport{padding-top:2px;}
   .partner-carousel .carousel-track{justify-content:safe center;}
@@ -657,57 +675,51 @@
       <h2>Partnerbetriebe &amp; Lieferanten</h2>
       <p class="section-sub">Verlässliche Betriebe und Hersteller, mit denen wir zusammenarbeiten.</p>
 
-      <div class="carousel partner-carousel" id="partnerCarousel">
-        <div class="carousel-viewport" id="partnerViewport" tabindex="0" role="region" aria-roledescription="Karussell" aria-label="Partnerbetriebe und Lieferanten">
-          <ul class="carousel-track" id="partnerTrack">
-            <li class="carousel-slide">
-          <article class="partner-card">
-            <a class="partner-logo-link" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">
-              <img class="partner-logo" src="partner-zimmerei-kern.jpg" alt="Logo Zimmerei Kern" loading="lazy" decoding="async">
-            </a>
-            <p class="partner-tag">Partnerbetrieb</p>
-            <h3>Zimmerei Kern</h3>
-            <p>Zimmererhandwerk</p>
-            <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
-          </article>
-            </li>
-            <li class="carousel-slide">
-          <article class="partner-card">
-            <a class="partner-logo-link" href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">
-              <img class="partner-logo partner-logo-wide" src="partner-braas.jpg" alt="Logo Braas" loading="lazy" decoding="async">
-            </a>
-            <p class="partner-tag">Lieferant</p>
-            <h3>Braas (BMI Deutschland)</h3>
-            <p>Dachsteine, Dachziegel und passendes Zubehör. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">Braas Garantieversprechen</a>.</p>
-            <a class="btn btn-ghost" href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">Website ansehen</a>
-          </article>
-            </li>
-            <li class="carousel-slide">
-          <article class="partner-card">
-            <a class="partner-logo-link" href="https://www.bmigroup.com/de/icopal/" target="_blank" rel="noopener">
-              <img class="partner-logo partner-logo-wide" src="partner-icopal.jpg" alt="Logo icopal" loading="lazy" decoding="async">
-            </a>
-            <p class="partner-tag">Lieferant</p>
-            <h3>icopal (BMI Deutschland)</h3>
-            <p>„Dächer für eine neue Zeit“: Flachdachabdichtung von icopal. Bitumenbahnen, Kunststoffbahnen, Dampfsperren und Systemkomponenten. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/icopal/" target="_blank" rel="noopener">icopal Qualitätsversprechen</a>.</p>
-            <a class="btn btn-ghost" href="https://www.bmigroup.com/de/icopal/" target="_blank" rel="noopener">Website ansehen</a>
-          </article>
-            </li>
-            <li class="carousel-slide">
-          <article class="partner-card">
-            <a class="partner-logo-link" href="https://www.bmigroup.com/de/wolfin/" target="_blank" rel="noopener">
-              <img class="partner-logo partner-logo-wide" src="partner-wolfin.jpg" alt="Logo Wolfin" loading="lazy" decoding="async">
-            </a>
-            <p class="partner-tag">Lieferant</p>
-            <h3>Wolfin (BMI Deutschland)</h3>
-            <p>Ein kompetenter und innovativer Partner für alle Abdichtungsaufgaben: Kunststoff-Dach- und Dichtungsbahnen für Flachdach, Bauwerksabdichtung, Balkone und Terrassen. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/wolfin/" target="_blank" rel="noopener">Wolfin Qualitätsversprechen</a>.</p>
-            <a class="btn btn-ghost" href="https://www.bmigroup.com/de/wolfin/" target="_blank" rel="noopener">Website ansehen</a>
-          </article>
-            </li>
-          </ul>
+      <div class="partner-strip">
+        <div class="pl-group">
+          <p class="pl-label">Partnerbetriebe</p>
+          <div class="pl-row">
+            <button type="button" class="pl-logo active" data-target="pd-kern" aria-controls="pd-kern" aria-pressed="true" aria-label="Zimmerei Kern anzeigen"><img src="partner-zimmerei-kern.jpg" alt="Logo Zimmerei Kern" loading="lazy" decoding="async"></button>
+          </div>
         </div>
-        <button class="carousel-arrow carousel-prev" id="partnerPrev" aria-label="Vorheriger Eintrag">‹</button>
-        <button class="carousel-arrow carousel-next" id="partnerNext" aria-label="Nächster Eintrag">›</button>
+        <div class="pl-group">
+          <p class="pl-label">Lieferanten</p>
+          <div class="pl-row">
+            <button type="button" class="pl-logo" data-target="pd-braas" aria-controls="pd-braas" aria-pressed="false" aria-label="Braas anzeigen"><img src="partner-braas.jpg" alt="Logo Braas" loading="lazy" decoding="async"></button>
+            <button type="button" class="pl-logo" data-target="pd-icopal" aria-controls="pd-icopal" aria-pressed="false" aria-label="icopal anzeigen"><img src="partner-icopal.jpg" alt="Logo icopal" loading="lazy" decoding="async"></button>
+            <button type="button" class="pl-logo" data-target="pd-wolfin" aria-controls="pd-wolfin" aria-pressed="false" aria-label="Wolfin anzeigen"><img src="partner-wolfin.jpg" alt="Logo Wolfin" loading="lazy" decoding="async"></button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-detail" id="partnerDetail" aria-live="polite">
+        <div class="pd" id="pd-kern">
+          <p class="pd-tag">Partnerbetrieb</p>
+          <h3>Zimmerei Kern</h3>
+          <p class="pd-sub">Zimmererhandwerk</p>
+          <p>Unser Partnerbetrieb für das Zimmererhandwerk.</p>
+          <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
+        </div>
+        <div class="pd" id="pd-braas" hidden>
+          <p class="pd-tag">Lieferant</p>
+          <h3>Braas (BMI Deutschland)</h3>
+          
+          <p>Dachsteine, Dachziegel und passendes Zubehör. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">Braas Garantieversprechen</a>.</p>
+          <a class="btn btn-ghost" href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">Website ansehen</a>
+        </div>
+        <div class="pd" id="pd-icopal" hidden>
+          <p class="pd-tag">Lieferant</p>
+          <h3>icopal (BMI Deutschland)</h3>
+          
+          <p>„Dächer für eine neue Zeit“: Flachdachabdichtung von icopal. Bitumenbahnen, Kunststoffbahnen, Dampfsperren und Systemkomponenten. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/icopal/" target="_blank" rel="noopener">icopal Qualitätsversprechen</a>.</p>
+          <a class="btn btn-ghost" href="https://www.bmigroup.com/de/icopal/" target="_blank" rel="noopener">Website ansehen</a>
+        </div>
+        <div class="pd" id="pd-wolfin" hidden>
+          <p class="pd-tag">Lieferant</p>
+          <h3>Wolfin (BMI Deutschland)</h3>
+          
+          <p>Ein kompetenter und innovativer Partner für alle Abdichtungsaufgaben: Kunststoff-Dach- und Dichtungsbahnen für Flachdach, Bauwerksabdichtung, Balkone und Terrassen. Unser Lieferant, mit dem <a href="https://www.bmigroup.com/de/wolfin/" target="_blank" rel="noopener">Wolfin Qualitätsversprechen</a>.</p>
+          <a class="btn btn-ghost" href="https://www.bmigroup.com/de/wolfin/" target="_blank" rel="noopener">Website ansehen</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1097,43 +1109,25 @@
     }
   })();
 
-  function initPartnerCarousel(pre){
-    var viewport = document.getElementById(pre + 'Viewport');
-    var track = document.getElementById(pre + 'Track');
-    var prevBtn = document.getElementById(pre + 'Prev');
-    var nextBtn = document.getElementById(pre + 'Next');
-    if (!viewport || !track) { return; }
-    var slides = Array.prototype.slice.call(track.children);
-    var current = 0, timer = null;
-    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function overflows(){ return track.scrollWidth > viewport.clientWidth + 4; }
-    function updateUi(){
-      var show = overflows();
-      prevBtn.style.display = nextBtn.style.display = show ? '' : 'none';
-      if (!show) { stop(); } else { start(); }
+  (function(){
+    var logos = Array.prototype.slice.call(document.querySelectorAll('.pl-logo'));
+    var details = Array.prototype.slice.call(document.querySelectorAll('.partner-detail .pd'));
+    if (!logos.length) { return; }
+    function show(id){
+      logos.forEach(function(l){
+        var on = l.getAttribute('data-target') === id;
+        l.classList.toggle('active', on);
+        l.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      details.forEach(function(d){ d.hidden = (d.id !== id); });
     }
-    function goTo(i){
-      if (i < 0) { i = slides.length - 1; }
-      if (i >= slides.length) { i = 0; }
-      current = i;
-      viewport.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' });
-    }
-    function stop(){ if (timer) { window.clearInterval(timer); timer = null; } }
-    function start(){
-      if (reduced || timer || !overflows()) { return; }
-      timer = window.setInterval(function(){ goTo(current + 1); }, 5000);
-    }
-    prevBtn.addEventListener('click', function(){ stop(); goTo(current - 1); });
-    nextBtn.addEventListener('click', function(){ stop(); goTo(current + 1); });
-    viewport.addEventListener('mouseenter', stop);
-    viewport.addEventListener('mouseleave', start);
-    viewport.addEventListener('focusin', stop);
-    viewport.addEventListener('touchstart', stop, { passive: true });
-    window.addEventListener('resize', updateUi);
-    updateUi();
-  }
-  initPartnerCarousel('partner');
+    logos.forEach(function(l){
+      var id = l.getAttribute('data-target');
+      l.addEventListener('mouseenter', function(){ show(id); });
+      l.addEventListener('focus', function(){ show(id); });
+      l.addEventListener('click', function(){ show(id); });
+    });
+  })();
 </script>
 
 <script src="social-float.js" defer></script>
