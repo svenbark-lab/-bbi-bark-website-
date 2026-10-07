@@ -329,7 +329,9 @@
 
   /* ---------- Partnerbetriebe & Lieferanten ---------- */
   .partner{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .partner-carousel{margin-top:48px;}
+  .partner-group{font-size:1.25em; margin:44px 0 4px; text-align:center;}
+  .partner-group-sub{text-align:center; color:var(--ink-soft); margin:0 0 6px; font-size:.95em;}
+  .partner-carousel{margin-top:22px;}
   .partner-carousel .carousel-viewport{padding-top:2px;}
   .partner-carousel .carousel-track{justify-content:safe center;}
   .partner-carousel .carousel-slide{flex:0 0 calc((100% - 64px) / 3);}
@@ -654,8 +656,10 @@
   <section class="partner" id="partner">
     <div class="wrap">
       <h2>Partnerbetriebe &amp; Lieferanten</h2>
-      <p class="section-sub">Verlässliche Handwerksbetriebe und Partner, mit denen wir zusammenarbeiten.</p>
+      <p class="section-sub">Verlässliche Betriebe und Hersteller, mit denen wir zusammenarbeiten.</p>
 
+      <h3 class="partner-group">Partnerbetriebe</h3>
+      <p class="partner-group-sub">Handwerksbetriebe, mit denen wir bei unseren Bauvorhaben zusammenarbeiten.</p>
       <div class="carousel partner-carousel" id="partnerCarousel">
         <div class="carousel-viewport" id="partnerViewport" tabindex="0" role="region" aria-roledescription="Karussell" aria-label="Partnerbetriebe">
           <ul class="carousel-track" id="partnerTrack">
@@ -669,6 +673,16 @@
             <a class="btn btn-ghost" href="https://www.zimmerei-kern.de/" target="_blank" rel="noopener">Website ansehen</a>
           </article>
             </li>
+          </ul>
+        </div>
+        <button class="carousel-arrow carousel-prev" id="partnerPrev" aria-label="Vorheriger Eintrag">‹</button>
+        <button class="carousel-arrow carousel-next" id="partnerNext" aria-label="Nächster Eintrag">›</button>
+      </div>
+      <h3 class="partner-group">Lieferanten</h3>
+      <p class="partner-group-sub">Hersteller, von denen wir Material für Dach und Abdichtung beziehen.</p>
+      <div class="carousel partner-carousel" id="lieferCarousel">
+        <div class="carousel-viewport" id="lieferViewport" tabindex="0" role="region" aria-roledescription="Karussell" aria-label="Lieferanten">
+          <ul class="carousel-track" id="lieferTrack">
             <li class="carousel-slide">
           <article class="partner-card">
             <a class="partner-logo-link" href="https://www.bmigroup.com/de/braas/" target="_blank" rel="noopener">
@@ -701,8 +715,8 @@
             </li>
           </ul>
         </div>
-        <button class="carousel-arrow carousel-prev" id="partnerPrev" aria-label="Vorheriger Partner">‹</button>
-        <button class="carousel-arrow carousel-next" id="partnerNext" aria-label="Nächster Partner">›</button>
+        <button class="carousel-arrow carousel-prev" id="lieferPrev" aria-label="Vorheriger Eintrag">‹</button>
+        <button class="carousel-arrow carousel-next" id="lieferNext" aria-label="Nächster Eintrag">›</button>
       </div>
     </div>
   </section>
@@ -1092,11 +1106,11 @@
     }
   })();
 
-  (function(){
-    var viewport = document.getElementById('partnerViewport');
-    var track = document.getElementById('partnerTrack');
-    var prevBtn = document.getElementById('partnerPrev');
-    var nextBtn = document.getElementById('partnerNext');
+  function initPartnerCarousel(pre){
+    var viewport = document.getElementById(pre + 'Viewport');
+    var track = document.getElementById(pre + 'Track');
+    var prevBtn = document.getElementById(pre + 'Prev');
+    var nextBtn = document.getElementById(pre + 'Next');
     if (!viewport || !track) { return; }
     var slides = Array.prototype.slice.call(track.children);
     var current = 0, timer = null;
@@ -1127,7 +1141,9 @@
     viewport.addEventListener('touchstart', stop, { passive: true });
     window.addEventListener('resize', updateUi);
     updateUi();
-  })();
+  }
+  initPartnerCarousel('partner');
+  initPartnerCarousel('liefer');
 </script>
 
 <script src="social-float.js" defer></script>
