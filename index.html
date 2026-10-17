@@ -484,7 +484,7 @@
           <a href="#kontakt" class="btn btn-primary">Projekt besprechen</a>
           <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
         </div>
-        <a href="tel:+494216594806" class="hero-phone">Oder direkt anrufen: 0421 6594806</a>
+        <a class="hero-phone js-tel" data-pre="Oder direkt anrufen: "></a>
       </div>
       <div class="hero-art">
         <img class="hero-photo" src="hero-bauplan.jpg" alt="Beratungsgespräch am Bauplan: Eine Familie bespricht gemeinsam mit der BBI den Grundriss" fetchpriority="high" decoding="async">
@@ -727,7 +727,7 @@
           BBI Bark GmbH &amp; Co. Bauplanungs- und Immobilien KG<br>
           An der Baumschule 23<br>
           27721 Ritterhude<br><br>
-          Telefon <a class="kontakt-route" href="tel:+494216594806">0421 6594806</a><br>
+          Telefon <a class="kontakt-route js-tel"></a><br>
           <a class="js-email"></a>
         </address>
         <a class="kontakt-route" href="https://www.google.com/maps/search/?api=1&query=An+der+Baumschule+23%2C+27721+Ritterhude" target="_blank" rel="noopener">Route planen</a>
@@ -800,7 +800,7 @@
     </div>
     <div>
       <h3 class="footer-heading">Kontakt</h3>
-      <p>Telefon: <a href="tel:+494216594806">0421 6594806</a><br>E-Mail: <a class="js-email"></a></p>
+      <p>Telefon: <a class="js-tel"></a><br>E-Mail: <a class="js-email"></a></p>
     </div>
     <div>
       <h3 class="footer-heading">Social Media</h3>
@@ -828,6 +828,11 @@
   document.querySelectorAll('.js-email').forEach(function(el){
     el.textContent = SITE_EMAIL;
     if (el.tagName === 'A') { el.href = 'mailto:' + SITE_EMAIL; }
+  });
+  var PHONE_AREA = '0421', PHONE_NUM = '6594806';
+  document.querySelectorAll('.js-tel').forEach(function(el){
+    el.textContent = (el.getAttribute('data-pre') || '') + PHONE_AREA + ' ' + PHONE_NUM;
+    el.href = 'tel:+49' + PHONE_AREA.slice(1) + PHONE_NUM;
   });
 
   var galleries = {
