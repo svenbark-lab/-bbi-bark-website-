@@ -200,17 +200,19 @@
   .process p{color:var(--ink-soft); font-size:.96em; margin:0; max-width:28ch;}
 
   /* ---------- Über uns ---------- */
-  .ueber-uns .wrap{max-width:760px;}
+  .ueber-uns .wrap{max-width:1040px;}
   .ueber-uns p{font-size:1.05em;}
-  .ueber-header{
-    display:flex; align-items:center; justify-content:space-between; gap:28px;
-    margin-bottom:6px;
-  }
-  .ueber-header h2{margin:0;}
-  .ueber-badge{width:200px; height:auto; flex-shrink:0;}
-  @media (max-width:560px){
-    .ueber-header{flex-direction:column; align-items:flex-start; gap:16px;}
-    .ueber-badge{width:170px; align-self:center;}
+  .ueber-grid{display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:center;}
+  .ueber-foto{margin:0;}
+  .ueber-foto img{width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; display:block; border-radius:var(--radius); box-shadow:0 10px 28px rgba(58,46,39,.18);}
+  .ueber-foto figcaption{margin-top:10px; font-family:Georgia,serif; font-style:italic; color:var(--ink-soft); font-size:.95em;}
+  .ueber-text h2{margin-top:0;}
+  .ueber-text blockquote{margin:28px 0;}
+  .ueber-badge{width:150px; height:auto; display:block; margin-top:8px;}
+  @media (max-width:760px){
+    .ueber-grid{grid-template-columns:1fr; gap:26px;}
+    .ueber-foto img{aspect-ratio:4/5; object-position:center 30%;}
+    .ueber-badge{width:130px; margin:8px auto 0;}
   }
   blockquote{
     margin:36px 0; padding-left:26px; border-left:3px solid var(--brick);
@@ -531,17 +533,22 @@
   <!-- ================= ÜBER UNS ================= -->
   <section class="ueber-uns" id="ueber-uns">
     <div class="wrap">
-      <div class="ueber-header">
-        <h2>Ein Familienbetrieb aus Ritterhude.</h2>
-        <img class="ueber-badge" src="bbi-logo-30-jahre.png" alt="Logo BBI Bark Bauplanungs und Immobiliengesellschaft, Ritterhude – 30+ Jahre Erfahrung schafft Werte" width="200" height="200">
+      <div class="ueber-grid">
+        <figure class="ueber-foto">
+          <img src="ueber-uns-weitblick.jpg" alt="Sven Bark zeigt mit ausgestrecktem Arm in den Himmel, neben ihm eine Figur mit Fernglas am Wasser" width="900" height="1200" loading="lazy" decoding="async">
+          <figcaption>Immer mit Blick nach vorn.</figcaption>
+        </figure>
+        <div class="ueber-text">
+          <h2>Mit Weitblick gebaut. Ein Familienbetrieb aus Ritterhude.</h2>
+          <p>Wer ein Haus baut, entscheidet für Jahrzehnte. Deshalb denken wir bei der BBI weiter als bis zur Schlüsselübergabe: vom ersten Entwurf über die Handwerker vor Ort bis zu der Frage, ob das Haus auch in zwanzig Jahren noch zu Ihnen passt. Die BBI wird seit über 30 Jahren persönlich geführt, mit kurzen Wegen und einem festen Ansprechpartner.</p>
+          <p>Das Unternehmen ist in Ritterhude verwurzelt und kennt die Region: Bebauungspläne, Gegebenheiten und Handwerksbetriebe vor Ort. Nachhaltigkeit heißt für uns: ein fairer Umgang mit Kunden und Partnern.</p>
+          <blockquote>
+            Ein Zuhause ist so individuell wie der Mensch, der es baut.
+            <cite>— Sven Bark, Geschäftsführer</cite>
+          </blockquote>
+          <img class="ueber-badge" src="bbi-logo-30-jahre.png" alt="Logo BBI Bark Bauplanungs und Immobiliengesellschaft, Ritterhude – 30+ Jahre Erfahrung schafft Werte" width="200" height="200" loading="lazy" decoding="async">
+        </div>
       </div>
-      <p>Die BBI wird persönlich geführt – mit kurzen Wegen und einem festen Ansprechpartner von der ersten Skizze bis zur Schlüsselübergabe. Seit über 30 Jahren ist unser Team Ihr Immobilienpartner in der Region.</p>
-      <p>Für uns als Team sind nachhaltiges Handeln und langfristiges Wirtschaften die Triebfeder unserer Unternehmensphilosophie – wir denken, darin liegt die Ursache für unseren langfristigen Erfolg. Nachhaltigkeit heißt für uns: ein fairer Umgang mit Kunden und Partnern und zufriedene Mitarbeiter.</p>
-      <p>Das Unternehmen ist in Ritterhude verwurzelt und kennt die Region: Bebauungspläne, Gegebenheiten und Handwerksbetriebe vor Ort.</p>
-      <blockquote>
-        Ein Zuhause ist so individuell wie der Mensch, der es baut.
-        <cite>— Sven Bark, Geschäftsführer</cite>
-      </blockquote>
     </div>
   </section>
 
